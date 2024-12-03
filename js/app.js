@@ -39,12 +39,13 @@ addTaskbtn.addEventListener('click', (e)=> {
 
 // take input
 const validateInput = ()=> {
-
+    
     if (taskInput.value === '') {
         alert('Please enter a task before submitting')
     } else {
         makeTask(taskInput.value)
     }
+    taskInput.value = ''
 }
 
 // make task
@@ -56,7 +57,7 @@ const makeTask = (chore)=> {
         id: taskArray.length + 1,
         task: chore,
         isCompleted: false,
-        dateAdded: timeStamp.toTimeString(),
+        dateAdded: timeStamp.toString(),
         dateCompleted: ''
     }
 
@@ -86,7 +87,18 @@ const makeTaskItem = (el, item)=> {
     const label = document.createElement('label')
     label.setAttribute('for', `taskId-${item.id}`)
     label.classList.add('form-check-label', 'text-capitalize', 'mx-2', 'task-label')
-    label.innerText = `${item.task} - Date Created: ${item.dateAdded}`
+
+    // label.innerText = `${item.task} - Date Created: ${item.dateAdded}`
+    const taskSpan = document.createElement('span')
+    taskSpan.classList.add('task-span')
+    taskSpan.innerText = item.task
+
+    const dateAddedSpan = document.createElement('span')
+    dateAddedSpan.classList.add('date-added')
+    dateAddedSpan.innerText = `| ${item.dateAdded}`
+    label.appendChild(taskSpan)
+    label.appendChild(dateAddedSpan)
+
 
     li.appendChild(checkbox)
     li.appendChild(label)
@@ -102,20 +114,37 @@ completedBtn.addEventListener('click', (e)=> {
 
 // validate checked tasks
 const validateCompletedTasks = ()=> {
-
     let completedArray = []
     const checkboxes = document.querySelectorAll('.checkbox')
     const allTasks = document.querySelectorAll('.task-label')
 
-    for (let i = 0; i < checkboxes.length; i++) {
-        if (checkboxes[i].checked && (allTasks[i]. getAttribute('for') == checkboxes[i].getAttribute('id'))) {
-            allTasks[i]. classList.add('text-success');
-            completedArray = [...completedArray, allTasks[i].innerText];
+    // testing...
 
-            //loop through taskArray and set isCompleted to !isCompleted
-            // update date Completed
+    for (let i = 0; i < taskArray.length; i++) {
+        // console.log(taskArray[i]. isCompleted)
+        let isComplete = taskArray[i].isCompleted // t or f
+        for (let i = 0; i < checkboxes.length; i++) {
+            if (checkboxes[i].checked && (allTasks[i].getAttribute('for')== checkboxes[i]. getAttribute('id'))) {
+                isComplete = !isComplete
+                let dateCompleted = new Date()
+
+                taskArray[i] = {
+                    ...taskArray[i],
+                    isCompleted: isComplete,
+                    dateCompleted: dateCompleted.toString()
+                }
+
+                allTasks[i]. classList.add('text-success');
+                completedArray = [...completedArray, allTasks[i].innerText];
+            }
         }
     }
+
+
+
+    // end testing
+
+
 
     completedTasks.innerText = completedArray.length
     // console.log(completedArray)
