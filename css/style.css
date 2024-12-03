@@ -8,7 +8,7 @@ body {
 
 h1 {
     color: #0000ff;
-    text-shadow: 3px 3px 3px #000 ;
+    text-shadow: 3px 3px 3px #000;
 }
 
 h2, .text {
@@ -25,9 +25,8 @@ p {
 
 .header {
     padding: 10px 0;
-    background-color: #fff;
+    background-color: #808080;
     background-image: linear-gradient(#fff 70% #000);
-    border-bottom: 5px solid #0000ff
 
 }
 

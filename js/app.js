@@ -14,7 +14,7 @@ const addTaskbtn = document.getElementById('addTaskBtn')
 const taskList = document.getElementById('taskList')
 const completedBtn = document.getElementById('completedBtn')
 const completedList = document.getElementById('completedList')
-const completedTask = document.getElementById('completedTask')
+const completedTasks = document.getElementById('completedTasks')
 
 // array of tasks
 let taskArray = []
@@ -96,7 +96,8 @@ const makeTaskItem = (el, item)=> {
 
 completedBtn.addEventListener('click', (e)=> {
     e.preventDefault()
-    console.log('clicked')
+    // console.log('clicked')
+    validateCompletedTasks()
 })
 
 // validate checked tasks
@@ -106,5 +107,32 @@ const validateCompletedTasks = ()=> {
     const checkboxes = document.querySelectorAll('.checkbox')
     const allTasks = document.querySelectorAll('.task-label')
 
-    
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked && (allTasks[i]. getAttribute('for') == checkboxes[i].getAttribute('id'))) {
+            allTasks[i]. classList.add('text-success');
+            completedArray = [...completedArray, allTasks[i].innerText];
+
+            //loop through taskArray and set isCompleted to !isCompleted
+            // update date Completed
+        }
+    }
+
+    completedTasks.innerText = completedArray.length
+    // console.log(completedArray)
+    makeCompleteItem(completedArray)
+
+}
+
+// make li for completedList
+const makeCompleteItem = (arr)=> {
+
+    arr.forEach(item => {
+        const task = item
+
+        const completedItem = document.createElement('li')
+        completedItem.classList.add('list-group-item', 'text-success', 'text-capitalize', 'completed-item')
+        completedItem.innerText = task
+        
+        completedList.appendChild(completedItem)
+    })
 }
