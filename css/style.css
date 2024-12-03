@@ -45,3 +45,15 @@ p {
     background-color: #fff;
     border: 3px solid #0000ff;
 }
+
+.btn {
+    color: #fff;
+    background-color: #0000ff;
+}
+
+#addTaskbtn{
+    background-color: #0000ff;
+    color: #fff;
+}
+
+
