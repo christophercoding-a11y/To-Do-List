@@ -116,30 +116,18 @@ completedBtn.addEventListener('click', (e)=> {
 const validateCompletedTasks = ()=> {
     let completedArray = []
     const checkboxes = document.querySelectorAll('.checkbox')
-    const allTasks = document.querySelectorAll('.task-label')
 
     // testing...
 
-    for (let i = 0; i < taskArray.length; i++) {
-        // console.log(taskArray[i]. isCompleted)
-        let isComplete = taskArray[i].isCompleted // t or f
-        for (let i = 0; i < checkboxes.length; i++) {
-            if (checkboxes[i].checked && (allTasks[i].getAttribute('for')== checkboxes[i]. getAttribute('id'))) {
-                isComplete = !isComplete
-                let dateCompleted = new Date()
-
-                taskArray[i] = {
-                    ...taskArray[i],
-                    isCompleted: isComplete,
-                    dateCompleted: dateCompleted.toString()
-                }
-
-                allTasks[i]. classList.add('text-success');
-                completedArray = [...completedArray, allTasks[i].innerText];
+    for (let i = 0; i < checkboxes.length; i++) {
+        if (checkboxes[i].checked &&(checkboxes[i].getAttribute('data-id') == taskArray[i].id)) {
+            taskArray[i] = {
+                ...taskArray[i],
+                isCompleted: true,
+                dateCompleted: new Date().toString()
             }
         }
     }
-
 
 
     // end testing
