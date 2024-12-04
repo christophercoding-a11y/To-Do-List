@@ -16,6 +16,9 @@ const completedBtn = document.getElementById('completedBtn')
 const completedList = document.getElementById('completedList')
 const completedTasks = document.getElementById('completedTasks')
 
+let prevItem
+let currentItem
+
 // array of tasks
 let taskArray = []
 
@@ -169,5 +172,13 @@ const makeCompleteItem = (arr)=> {
         completedItem.innerText = `${task} | completed: ${dateCompleted}`
         
         completedList.appendChild(completedItem)
+
+        currentItem = task
+
+        if (currentItem !== prevItem) {
+            completedList.appendChild(completedItem)
+            prevItem = currentItem
+            return
+        }
     })
 }
