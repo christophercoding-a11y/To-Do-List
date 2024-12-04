@@ -82,6 +82,7 @@ const makeTaskItem = (el, item)=> {
     const checkbox = document.createElement('input')
     checkbox.setAttribute('type', 'checkbox')
     checkbox.setAttribute('id', `taskId-${item.id}`)
+    checkbox.setAttribute('data-id', `${item.id}`)
     checkbox.classList.add('form-check-input', 'checkbox')
 
     const label = document.createElement('label')
@@ -129,13 +130,19 @@ const validateCompletedTasks = ()=> {
         }
     }
 
+    for (let i = 0; i < taskArray.length; i++) {
+
+        if (taskArray[i].isCompleted) {
+            completedArray = [...completedArray, taskArray[i]]
+        }
+    }
+
 
     // end testing
 
 
 
     completedTasks.innerText = completedArray.length
-    // console.log(completedArray)
     makeCompleteItem(completedArray)
 
 }
@@ -144,11 +151,12 @@ const validateCompletedTasks = ()=> {
 const makeCompleteItem = (arr)=> {
 
     arr.forEach(item => {
-        const task = item
+        const task = item.task
+        const dateCompleted = item.dateCompleted
 
         const completedItem = document.createElement('li')
         completedItem.classList.add('list-group-item', 'text-success', 'text-capitalize', 'completed-item')
-        completedItem.innerText = task
+        completedItem.innerText = `${task} | completed: ${dateCompleted}`
         
         completedList.appendChild(completedItem)
     })
